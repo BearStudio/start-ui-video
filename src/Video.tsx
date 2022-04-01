@@ -1,8 +1,10 @@
 import {Composition} from 'remotion';
 import {HelloWorld} from './HelloWorld';
-import {Logo} from './HelloWorld/Logo';
+// import {Logo} from './HelloWorld/Logo';
+import {Logo} from './components/Logo';
 import {Subtitle} from './HelloWorld/Subtitle';
 import {Title} from './HelloWorld/Title';
+import {Stars} from './components/Stars';
 
 export const RemotionVideo: React.FC = () => {
 	return (
@@ -13,7 +15,7 @@ export const RemotionVideo: React.FC = () => {
 				durationInFrames={150}
 				fps={30}
 				width={1920}
-				height={1080}
+				height={1200}
 				defaultProps={{
 					titleText: 'Welcome to Remotion',
 					titleColor: 'black',
@@ -22,10 +24,18 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Logo"
 				component={Logo}
-				durationInFrames={200}
+				durationInFrames={30}
 				fps={30}
 				width={1920}
-				height={1080}
+				height={1200}
+			/>
+			<Composition
+				id="Stars"
+				component={Stars}
+				durationInFrames={90}
+				fps={30}
+				width={1920}
+				height={1200}
 			/>
 			<Composition
 				id="Title"
@@ -33,7 +43,7 @@ export const RemotionVideo: React.FC = () => {
 				durationInFrames={100}
 				fps={30}
 				width={1920}
-				height={1080}
+				height={1200}
 				defaultProps={{
 					titleText: 'Welcome to Remotion',
 					titleColor: 'black',
@@ -45,7 +55,7 @@ export const RemotionVideo: React.FC = () => {
 				durationInFrames={100}
 				fps={30}
 				width={1920}
-				height={1080}
+				height={1200}
 			/>
 		</>
 	);

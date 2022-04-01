@@ -1,5 +1,5 @@
 import {interpolate, Sequence, useCurrentFrame, useVideoConfig} from 'remotion';
-import {Logo} from './HelloWorld/Logo';
+import {Logo} from './components/Logo';
 import {Subtitle} from './HelloWorld/Subtitle';
 import {Title} from './HelloWorld/Title';
 
@@ -24,8 +24,8 @@ export const HelloWorld: React.FC<{
 	return (
 		<div style={{flex: 1, backgroundColor: 'white'}}>
 			<div style={{opacity}}>
-				<Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
-					<Logo transitionStart={transitionStart} />
+				<Sequence from={0} durationInFrames={30}>
+					<Logo />
 				</Sequence>
 				<Sequence from={transitionStart + 10}>
 					<Title titleText={titleText} titleColor={titleColor} />
