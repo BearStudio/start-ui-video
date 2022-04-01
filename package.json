@@ -17,6 +17,7 @@
 		"@remotion/cli": "^2.3.2",
 		"@remotion/eslint-config": "^2.3.2",
 		"@remotion/renderer": "^2.3.2",
+		"dayjs": "1.11.0",
 		"eslint": "^7.15.0",
 		"express": "^4.17.1",
 		"prettier": "^2.2.1",

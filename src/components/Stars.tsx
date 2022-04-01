@@ -17,8 +17,9 @@ export const Stars = ({stargazersCount = 0}) => {
 
 	return (
 		<>
-			{randomCoordinates.map(({x, y, scale, speed}) => (
+			{randomCoordinates.map(({x, y, scale, speed}, index) => (
 				<Star
+					key={index}
 					style={{
 						position: 'absolute',
 						top: y,
