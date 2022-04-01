@@ -14,6 +14,9 @@ export const RemotionVideo: React.FC = () => {
 				fps={30}
 				width={1920}
 				height={1200}
+				defaultProps={{
+					repository: 'BearStudio/start-ui-web',
+				}}
 			/>
 			<Composition
 				id="Logo"

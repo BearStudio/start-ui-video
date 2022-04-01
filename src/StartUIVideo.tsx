@@ -5,7 +5,9 @@ import '@fontsource/inter/900.css';
 import '@fontsource/inter/500.css';
 import {ContributorsOfTheWeek} from './components/ContributorsOfTheWeek';
 
-export const StartUIVideo: React.FC = () => {
+export const StartUIVideo: React.FC<{
+	repository: string;
+}> = ({repository}) => {
 	const frame = useCurrentFrame();
 	const videoConfig = useVideoConfig();
 
@@ -26,10 +28,10 @@ export const StartUIVideo: React.FC = () => {
 					<Logo />
 				</Sequence>
 				<Sequence from={30} durationInFrames={90}>
-					<StargazersCount />
+					<StargazersCount repository={repository} />
 				</Sequence>
 				<Sequence from={30 + 90} durationInFrames={150}>
-					<ContributorsOfTheWeek />
+					<ContributorsOfTheWeek repository={repository} />
 				</Sequence>
 			</div>
 		</div>

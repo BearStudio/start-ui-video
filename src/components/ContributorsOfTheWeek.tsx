@@ -1,28 +1,27 @@
-import {interpolate} from 'remotion';
-import {useEffect} from 'react';
-import {continueRender, Img} from 'remotion';
+import {useEffect, VFC} from 'react';
+import {continueRender} from 'remotion';
 import {useCallback} from 'react';
-import {useCurrentFrame} from 'remotion';
-import {useVideoConfig} from 'remotion';
 import {delayRender} from 'remotion';
 import {useState} from 'react';
 import {PullRequest, User} from '../@types/GitHub';
 import dayjs from 'dayjs';
 import {Contributor} from './Contributor';
 
-export const ContributorsOfTheWeek = () => {
+export const ContributorsOfTheWeek: VFC<{repository: string}> = ({
+	repository,
+}) => {
 	const [data, setData] = useState<PullRequest[]>([]);
 	const [handle] = useState(() => delayRender());
 
 	const fetchData = useCallback(async () => {
 		const response = await fetch(
-			'https://api.github.com/repos/BearStudio/start-ui-web/pulls?state=closed&sort=updated&direction=desc'
+			`https://api.github.com/repos/${repository}/pulls?state=closed&sort=updated&direction=desc`
 		);
 		const json: PullRequest[] = await response.json();
 		setData(json);
 
 		continueRender(handle);
-	}, [handle]);
+	}, [handle, repository]);
 
 	useEffect(() => {
 		fetchData();

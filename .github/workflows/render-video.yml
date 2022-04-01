@@ -2,14 +2,10 @@ name: Render video
 on:
   workflow_dispatch:
     inputs:
-      titleText:
-        description: "Which text should it say?"
+      repository:
+        description: "Which repository should we use?"
         required: true
-        default: "Welcome to Remotion"
-      titleColor:
-        description: "Which color should it be in?"
-        required: true
-        default: "black"
+        default: "BearStudio/start-ui-web"
 jobs:
   render:
     name: Render video

@@ -1,6 +1,6 @@
 import {spring} from 'remotion';
 import {useVideoConfig} from 'remotion';
-import {useEffect} from 'react';
+import {useEffect, VFC} from 'react';
 import {continueRender, useCurrentFrame} from 'remotion';
 import {useCallback} from 'react';
 import {delayRender} from 'remotion';
@@ -8,7 +8,7 @@ import {useState} from 'react';
 import {Repository} from '../@types/GitHub';
 import {Stars} from './Stars';
 
-export const StargazersCount = () => {
+export const StargazersCount: VFC<{repository: string}> = ({repository}) => {
 	const [data, setData] = useState<Repository | undefined>(undefined);
 	const [handle] = useState(() => delayRender());
 
@@ -16,14 +16,12 @@ export const StargazersCount = () => {
 	const frame = useCurrentFrame();
 
 	const fetchData = useCallback(async () => {
-		const response = await fetch(
-			'https://api.github.com/repos/BearStudio/start-ui-web'
-		);
+		const response = await fetch(`https://api.github.com/repos/${repository}`);
 		const json: Repository = await response.json();
 		setData(json);
 
 		continueRender(handle);
-	}, [handle]);
+	}, [handle, repository]);
 
 	useEffect(() => {
 		fetchData();
