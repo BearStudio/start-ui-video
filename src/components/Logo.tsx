@@ -1,4 +1,4 @@
-import {useVideoConfig} from 'remotion';
+import {interpolate, useVideoConfig} from 'remotion';
 import {spring} from 'remotion';
 
 import {useCurrentFrame} from 'remotion';
@@ -17,6 +17,16 @@ export const Logo = () => {
 
 	const scale = (frame < 50 ? scaleIn : 1) * 2;
 
+	const TRANSITION_DURATION = 20;
+	const opacity = interpolate(
+		frame,
+		[
+			videoConfig.durationInFrames - TRANSITION_DURATION,
+			videoConfig.durationInFrames,
+		],
+		[1, 0]
+	);
+
 	return (
 		<svg
 			width="670"
@@ -29,6 +39,7 @@ export const Logo = () => {
 				left: '50%',
 				top: '50%',
 				transform: `translate(-50%, -50%) scale(${scale})`,
+				opacity,
 			}}
 		>
 			<path

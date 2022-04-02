@@ -1,4 +1,4 @@
-import {interpolate, Sequence, useCurrentFrame, useVideoConfig} from 'remotion';
+import {interpolate, Series, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Logo} from './components/Logo';
 import {StargazersCount} from './components/StargazersCount';
 import '@fontsource/inter/900.css';
@@ -24,15 +24,17 @@ export const StartUIVideo: React.FC<{
 	return (
 		<div style={{flex: 1, backgroundColor: 'white'}}>
 			<div style={{opacity}}>
-				<Sequence from={0} durationInFrames={30}>
-					<Logo />
-				</Sequence>
-				<Sequence from={30} durationInFrames={90}>
-					<StargazersCount repository={repository} />
-				</Sequence>
-				<Sequence from={30 + 90} durationInFrames={150}>
-					<ContributorsOfTheWeek repository={repository} />
-				</Sequence>
+				<Series>
+					<Series.Sequence durationInFrames={50}>
+						<Logo />
+					</Series.Sequence>
+					<Series.Sequence durationInFrames={80}>
+						<StargazersCount repository={repository} />
+					</Series.Sequence>
+					<Series.Sequence durationInFrames={150}>
+						<ContributorsOfTheWeek repository={repository} />
+					</Series.Sequence>
+				</Series>
 			</div>
 		</div>
 	);

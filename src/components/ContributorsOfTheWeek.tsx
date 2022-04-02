@@ -1,5 +1,5 @@
 import {useEffect, VFC} from 'react';
-import {continueRender} from 'remotion';
+import {continueRender, interpolate, useCurrentFrame} from 'remotion';
 import {useCallback} from 'react';
 import {delayRender} from 'remotion';
 import {useState} from 'react';
@@ -12,6 +12,8 @@ export const ContributorsOfTheWeek: VFC<{repository: string}> = ({
 }) => {
 	const [data, setData] = useState<PullRequest[]>([]);
 	const [handle] = useState(() => delayRender());
+
+	const frame = useCurrentFrame();
 
 	const fetchData = useCallback(async () => {
 		const response = await fetch(
@@ -42,6 +44,10 @@ export const ContributorsOfTheWeek: VFC<{repository: string}> = ({
 			return [...accumulator, currentValue.user];
 		}, INITIAL_VALUE);
 
+	const TRANSITION_DURATION = 20;
+
+	const opacity = interpolate(frame, [0, TRANSITION_DURATION], [0, 1]);
+
 	return (
 		<div>
 			<h1
@@ -53,6 +59,7 @@ export const ContributorsOfTheWeek: VFC<{repository: string}> = ({
 					fontFamily: 'Inter',
 					fontWeight: 'bold',
 					whiteSpace: 'nowrap',
+					opacity,
 				}}
 			>
 				Contributors of the week
