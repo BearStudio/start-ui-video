@@ -1,4 +1,4 @@
-import {spring} from 'remotion';
+import {interpolate, spring} from 'remotion';
 import {useVideoConfig} from 'remotion';
 import {useEffect, VFC} from 'react';
 import {continueRender, useCurrentFrame} from 'remotion';
@@ -37,8 +37,19 @@ export const StargazersCount: VFC<{repository: string}> = ({repository}) => {
 
 	const scale = (frame < 50 ? scaleIn : 1) * 2;
 
+	const TRANSITION_DURATION = 20;
+
+	const opacity = interpolate(
+		frame,
+		[
+			videoConfig.durationInFrames - TRANSITION_DURATION,
+			videoConfig.durationInFrames,
+		],
+		[1, 0]
+	);
+
 	return (
-		<>
+		<div style={{opacity}}>
 			<Stars stargazersCount={data?.stargazers_count} />
 			<div
 				style={{
@@ -54,6 +65,6 @@ export const StargazersCount: VFC<{repository: string}> = ({repository}) => {
 			>
 				{data?.stargazers_count} Stars
 			</div>
-		</>
+		</div>
 	);
 };

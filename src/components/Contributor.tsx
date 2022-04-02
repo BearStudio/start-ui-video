@@ -15,8 +15,8 @@ export const Contributor: FC<{
 	const opacity = interpolate(
 		frame,
 		[
-			index * OPACITY_TRANSITION_LENGTH,
-			index * OPACITY_TRANSITION_LENGTH + OPACITY_TRANSITION_LENGTH,
+			index + 1 * OPACITY_TRANSITION_LENGTH,
+			index + 1 * OPACITY_TRANSITION_LENGTH + OPACITY_TRANSITION_LENGTH,
 		],
 		[0, 1]
 	);
