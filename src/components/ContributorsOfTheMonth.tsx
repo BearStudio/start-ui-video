@@ -6,8 +6,9 @@ import {useState} from 'react';
 import {PullRequest, User} from '../@types/GitHub';
 import dayjs from 'dayjs';
 import {Contributor} from './Contributor';
+import {uniqBy} from 'lodash';
 
-export const ContributorsOfTheWeek: VFC<{repository: string}> = ({
+export const ContributorsOfTheMonth: VFC<{repository: string}> = ({
 	repository,
 }) => {
 	const [data, setData] = useState<PullRequest[]>([]);
@@ -31,19 +32,17 @@ export const ContributorsOfTheWeek: VFC<{repository: string}> = ({
 
 	const INITIAL_VALUE: Pick<User, 'id' | 'avatar_url' | 'login'>[] = [];
 
-	const users = data
-		.filter((pullRequest) => pullRequest.merged_at !== null)
-		.filter((pullRequest) =>
-			dayjs(pullRequest.merged_at).isAfter(dayjs().subtract(7, 'day'))
-		)
-		.reduce((accumulator, currentValue) => {
-			if (accumulator.some((user) => user.login === currentValue.user.login)) {
-				return accumulator;
-			}
-
-			return [...accumulator, currentValue.user];
-		}, INITIAL_VALUE);
-
+	const users = uniqBy(
+		data
+			.filter((pullRequest) => pullRequest.merged_at !== null)
+			.filter((pullRequest) =>
+				dayjs(pullRequest.merged_at).isAfter(dayjs().subtract(1, 'month'))
+			)
+			.reduce((accumulator, currentValue) => {
+				return [...accumulator, currentValue.user, ...currentValue.assignees];
+			}, INITIAL_VALUE),
+		'login'
+	);
 	const TRANSITION_DURATION = 20;
 
 	const opacity = interpolate(frame, [0, TRANSITION_DURATION], [0, 1]);
@@ -62,7 +61,7 @@ export const ContributorsOfTheWeek: VFC<{repository: string}> = ({
 					opacity,
 				}}
 			>
-				Contributors of the week
+				PR contributors of the month
 			</h1>
 			<div
 				style={{

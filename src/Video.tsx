@@ -2,7 +2,7 @@ import {Composition} from 'remotion';
 import {StartUIVideo} from './StartUIVideo';
 import {Logo} from './components/Logo';
 import {Stars} from './components/Stars';
-import {ContributorsOfTheWeek} from './components/ContributorsOfTheWeek';
+import {ContributorsOfTheMonth} from './components/ContributorsOfTheMonth';
 
 export const RemotionVideo: React.FC = () => {
 	return (
@@ -35,8 +35,8 @@ export const RemotionVideo: React.FC = () => {
 				height={1200}
 			/>
 			<Composition
-				id="ContributorsOfTheWeek"
-				component={ContributorsOfTheWeek}
+				id="ContributorsOfTheMonth"
+				component={ContributorsOfTheMonth}
 				durationInFrames={150}
 				fps={30}
 				width={1920}

@@ -3,7 +3,7 @@ import {Logo} from './components/Logo';
 import {StargazersCount} from './components/StargazersCount';
 import '@fontsource/inter/900.css';
 import '@fontsource/inter/500.css';
-import {ContributorsOfTheWeek} from './components/ContributorsOfTheWeek';
+import {ContributorsOfTheMonth} from './components/ContributorsOfTheMonth';
 
 export const StartUIVideo: React.FC<{
 	repository: string;
@@ -32,7 +32,7 @@ export const StartUIVideo: React.FC<{
 						<StargazersCount repository={repository} />
 					</Series.Sequence>
 					<Series.Sequence durationInFrames={150}>
-						<ContributorsOfTheWeek repository={repository} />
+						<ContributorsOfTheMonth repository={repository} />
 					</Series.Sequence>
 				</Series>
 			</div>
